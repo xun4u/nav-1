@@ -37,6 +37,7 @@ const render = () => {
             console.log('del')
             e.stopPropagation()
             hashMap.splice(index, 1)
+            setStorage()
             alert('删除成功')
             render()
         })
@@ -57,11 +58,17 @@ $(".addbutton").on('click', () => {
         logo: simplifyUrl(url)[0].toUpperCase(),
         url: url
     })
+    setStorage()
     render()
 })
 
 //网站关闭时保存hash到localstorage
-window.onbeforeunload = () => {
+// window.onbeforeunload = () => {
+//         const hashStr = JSON.stringify(hashMap)
+//         localStorage.setItem('siteList', hashStr)
+//     }
+//改为每次增加和删除都操作localStorage
+const setStorage = () => {
     const hashStr = JSON.stringify(hashMap)
     localStorage.setItem('siteList', hashStr)
 }

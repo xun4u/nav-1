@@ -143,6 +143,7 @@ var render = function render() {
       console.log('del');
       e.stopPropagation();
       hashMap.splice(index, 1);
+      setStorage();
       alert('删除成功');
       render();
     });
@@ -163,10 +164,16 @@ $(".addbutton").on('click', function () {
     logo: simplifyUrl(url)[0].toUpperCase(),
     url: url
   });
+  setStorage();
   render();
 }); //网站关闭时保存hash到localstorage
+// window.onbeforeunload = () => {
+//         const hashStr = JSON.stringify(hashMap)
+//         localStorage.setItem('siteList', hashStr)
+//     }
+//改为每次增加和删除都操作localStorage
 
-window.onbeforeunload = function () {
+var setStorage = function setStorage() {
   var hashStr = JSON.stringify(hashMap);
   localStorage.setItem('siteList', hashStr);
 }; //键盘事件
@@ -183,4 +190,4 @@ $(document).on('keypress', function (e) {
   }
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.67d6dc0f.js.map
+//# sourceMappingURL=main.c202b1dc.js.map
